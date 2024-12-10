@@ -24,4 +24,25 @@ Scenario Outline: Sunday isn't Friday
 .Tests d'éxecution
 image::tests.PNG[width=80%]
 
-== TP2...
+== TP2
+.Order.java (dans CocktailSteps.java)
+[source,java]
+    class Order {
+        private static String owner;
+        private static String target;
+        private static List<String> cocktails = new ArrayList<String>();
+        static void declareOwner(String newOwner) {
+            owner = newOwner;
+        }
+        static void declareTarget(String newTarget) {
+            target = newTarget;
+        }
+        static List<String> getCocktails() {
+            return cocktails;
+        }
+    }
+
+.Tests d'éxecution
+image::tests2.PNG[width=80%]
+
+== TP2
