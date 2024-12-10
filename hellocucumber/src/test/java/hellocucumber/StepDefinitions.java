@@ -32,8 +32,7 @@ public class StepDefinitions {
     }
     @When("I ask whether it's anything else! yet")
     public void i_ask_whether_it_s_anything_else_yet() {
-        
-        throw new io.cucumber.java.PendingException();
+        actualAnswer = IsItAnythingElse.isItAnythingElse(today);
     }
     @Then("I should be told {string}")
     public void i_should_be_told(String expectedAnswer) {
@@ -61,11 +60,11 @@ class IsItFriday {
     }
 class IsItSunday {
         static String isItSunday(String today) {
-            return "Sunday".equals(today) ? "TGIF" : "Non";
+            return "Sunday".equals(today) ? "Nope" : "Non";
         }
     }
 class IsItAnythingElse {
         static String isItAnythingElse(String today) {
-            return "anything else!".equals(today) ? "TGIF" : "Non";
+            return "anything else!".equals(today) ? "Nope" : "Non";
         }
     }
