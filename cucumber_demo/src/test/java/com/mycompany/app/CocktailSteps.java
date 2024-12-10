@@ -22,9 +22,9 @@ public class CocktailSteps {
     }
 
     @Then("there is {int} cocktail in the order")
-    public void there_is_no_cocktail_in_the_order(int nb) {
+    public void there_is_no_cocktail_in_the_order(int count) {
         List<String> cocktails =  order.getCocktails();
-        assertEquals(nb, cocktails.size());
+        assertEquals(count, cocktails.size());
     }
 }
 
