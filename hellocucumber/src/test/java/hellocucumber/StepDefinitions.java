@@ -18,6 +18,10 @@ public class StepDefinitions {
     public void today_is_friday() {
         today = "Friday";
     }
+    @Given("today is anything else!")
+    public void today_is_anything_else() {
+        today = "anything else!";
+    }
     @When("I ask whether it's Sunday yet")
     public void i_ask_whether_it_s_sunday_yet() {
         actualAnswer = IsItSunday.isItSunday(today);
@@ -25,6 +29,11 @@ public class StepDefinitions {
     @When("I ask whether it's Friday yet")
     public void i_ask_whether_it_s_friday_yet() {
         actualAnswer = IsItFriday.isItFriday(today);
+    }
+    @When("I ask whether it's anything else! yet")
+    public void i_ask_whether_it_s_anything_else_yet() {
+        
+        throw new io.cucumber.java.PendingException();
     }
     @Then("I should be told {string}")
     public void i_should_be_told(String expectedAnswer) {
@@ -53,5 +62,10 @@ class IsItFriday {
 class IsItSunday {
         static String isItSunday(String today) {
             return "Sunday".equals(today) ? "TGIF" : "Non";
+        }
+    }
+class IsItAnythingElse {
+        static String isItAnythingElse(String today) {
+            return "anything else!".equals(today) ? "TGIF" : "Non";
         }
     }
