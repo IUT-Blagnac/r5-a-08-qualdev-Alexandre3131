@@ -1,0 +1,21 @@
+{
+  "name": "tp3-tests",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "chai": "^5.1.2",
+    "cucumber": "^6.0.7",
+    "pdfgrep": "^1.0.0"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.1.0"
+  }
+}
