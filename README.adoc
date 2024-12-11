@@ -7,7 +7,7 @@ Ce dépôt concerne les rendus de mailto:alexandre.benachir@etu.univ-tlse2.fr[Al
 == TP1
 
 .is_it_friday_yet.feature
-[source,feature]
+[source,gherkin]
 Feature: Is it Friday yet?
 Everybody wants to know when it's Friday
 Scenario Outline: Sunday isn't Friday
@@ -45,4 +45,90 @@ image::tests.PNG[width=80%]
 .Tests d'éxecution
 image::tests2.PNG[width=80%]
 
-== TP2
+== TP3
+.applyJob.feature
+[source,gherkin]
+    Feature: Candidater pour un travail
+    Scenario: Candidater pour une offre d'emploi
+        Given l'utilisateur "Dupont" existe
+        And l'utilisateur "Martin" existe
+        When l'utilisateur "Dupont" remplit le formulaire de candidature avec les informations suivantes:
+        | champ   | valeur               |
+        | nom     | Dupont               |
+        | email   | dupont@example.com   |
+        | cv      | cv_dupont.pdf        |
+        And l'utilisateur "Dupont" envoie sa candidature à "Martin"
+        Then un message de confirmation devrait être affiché avec le texte "Votre candidature a été envoyée avec succès."
+        And l'historique des messages de "Dupont" devrait contenir un message envoyé à "Martin" avec le texte "Candidature envoyée par Dupont"
+        And l'historique des messages de "Martin" devrait être vide
+
+.applyJobStepsDefinition.js
+[source,javascript]
+    import { Given, When, Then } from '@cucumber/cucumber';
+    import User from '../User.js';
+
+    let user1;
+    let user2;
+
+    Given('l\'utilisateur {string} existe', function (nom) {
+    const email = `${nom.toLowerCase()}@example.com`;
+    if (nom === "Dupont") {
+        user1 = new User(nom, email);
+    } else if (nom === "Martin") {
+        user2 = new User(nom, email);
+    }
+    });
+
+    When('l\'utilisateur {string} remplit le formulaire de candidature avec les informations suivantes:', function (nom, table) {
+    const user = nom === "Dupont" ? user1 : user2;
+    const data = table.rowsHash();
+
+    user.candidature = {
+        nom: data.nom,
+        email: data.email,
+        cv: data.cv
+    };
+    });
+
+    When('l\'utilisateur {string} envoie sa candidature à {string}', function (nom1, nom2) {
+    const sender = nom1 === "Dupont" ? user1 : user2;
+    const receiver = nom2 === "Dupont" ? user1 : user2;
+
+    sender.send(receiver, "Candidature envoyée par " + sender.nom);
+    });
+
+    Then('un message de confirmation devrait être affiché avec le texte {string}', function (message) {
+    if (message !== "Votre candidature a été envoyée avec succès.") {
+        throw new Error(`Le message de confirmation attendu est incorrect : ${message}`);
+    }
+    });
+
+    Then('l\'historique des messages de {string} devrait contenir un message envoyé à {string} avec le texte {string}', function (nom1, nom2, message) {
+    const sender = nom1 === "Dupont" ? user1 : user2;
+    const expectedMessage = { to: nom2, message };
+
+    const messagesEnvoyes = sender.getMessagesEnvoyes();
+    const messageFound = messagesEnvoyes.some(msg => msg.to === nom2 && msg.message === message);
+    
+    if (!messageFound) {
+        throw new Error(`Le message envoyé de ${nom1} à ${nom2} avec le texte "${message}" n'a pas été trouvé.`);
+    }
+    });
+
+    Then('l\'historique des messages de {string} devrait être vide', function (nom) {
+    const receiver = nom === "Dupont" ? user1 : user2;
+
+    const messagesEnvoyes = receiver.getMessagesEnvoyes();
+    if (messagesEnvoyes.length > 0) {
+        throw new Error(`L'historique des messages de ${nom} ne devrait pas contenir de messages.`);
+    }
+    });
+
+.Objectifs des tests 
+Mon but en faisant ces tests sur la candidature aux jobs, c’était surtout de vérifier que tout marche comme prévu. 
+Je voulais m’assurer que quand un utilisateur remplit le formulaire et envoie sa candidature, tout se passe bien, que les infos comme le nom, l’email et le CV arrivent au bon endroit, et que le message de confirmation s’affiche correctement. 
+Ça m’a aussi permis de voir si l’interaction entre les utilisateurs fonctionne sans bug.
+
+.Tests d'éxecution
+image::tests3.PNG[width=80%]
+
