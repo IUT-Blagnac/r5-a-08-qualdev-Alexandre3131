@@ -120,3 +120,6 @@ Je voulais m’assurer que quand un utilisateur remplit le formulaire et envoie 
 .Tests d'éxecution
 image::tests3.PNG[width=80%]
 
+== TP4
+
+include::hellocucumber/report.txt[]

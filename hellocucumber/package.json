@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "cucumber": "^6.0.7",
+    "tail": "^2.2.6"
+  }
+}
