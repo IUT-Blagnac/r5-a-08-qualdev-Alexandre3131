@@ -146,3 +146,9 @@ Scenario Outline: Sunday isn't Friday        # hellocucumber/is_it_friday_yet.fe
 [INFO] Finished at: 2024-12-12T08:20:52+01:00
 [INFO] ------------------------------------------------------------------------
 ----
+
+Dans le fichier :
+====
+include::hellocucumber/target/cukedoctor/documentation.html[]
+====
+[source, html]
