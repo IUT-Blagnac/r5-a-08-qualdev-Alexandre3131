@@ -123,7 +123,7 @@ image::tests3.PNG[width=80%]
 == TP4
 .Documentation hellocucumber
 
-Dans le fichier :
+Dans le fichier suivant :
 ====
 include::hellocucumber/report.txt[]
 ====
@@ -147,7 +147,7 @@ Scenario Outline: Sunday isn't Friday        # hellocucumber/is_it_friday_yet.fe
 [INFO] ------------------------------------------------------------------------
 ----
 
-Dans le fichier :
+Dans le fichier suivant :
 ====
 include::hellocucumber/target/cukedoctor/documentation.html[]
 ====
