@@ -151,4 +151,5 @@ Dans le fichier :
 ====
 include::hellocucumber/target/cukedoctor/documentation.html[]
 ====
-[source, html]
+image::doc.PNG[width=80%]
+image::doc2.PNG[width=80%]
